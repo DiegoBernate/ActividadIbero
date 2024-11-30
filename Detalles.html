@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Detalles de la compra</title>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <table id="cart" class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th style="width:50%">Product</th>
+                    <th style="width:10%">Price</th>
+                    <th style="width:8%">Quantity</th>
+                    <th style="width:22%" class="text-center">Subtotal</th>
+                    <th style="width:10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-th="Información del producto">
+                        <div class="row">
+                            <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
+                            <div class="col-sm-10">
+                                <h4 class="nomargin">Producto escogido</h4>
+                                <p>Todas nuestras bebidas son 100% naturales y no incluyen ninguna clase de químico</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td data-th="Price" class="price" data-price="6.00">$6.00</td>
+                    <td data-th="Quantity">
+                        <input type="number" class="form-control text-center quantity" value="1" min="1">
+                    </td>
+                    <td data-th="Subtotal" class="text-center subtotal">6.00</td>
+                    <td class="actions" data-th=""></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr class="visible-xs">
+                    <td class="text-center"><strong>Total <span id="total-price">6.00</span></strong></td>
+                </tr>
+                <tr>
+                    <td><a href="index.html" class="btn btn-warning"><i class="fa fa-angle-left"></i> Volver a la tienda </a></td>
+                    <td colspan="2" class="hidden-xs"></td>
+                    <td><a href="#" class="btn btn-success btn-block"> Pagar <i class="fa fa-angle-right"></i></a></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <!-- Cargar jQuery primero -->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- Cargar Bootstrap después de jQuery -->
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <script>
+        // Función para actualizar el subtotal del único producto
+        function updateSubtotal() {
+            var price = parseFloat($('.price').data('price')); // Obtén el precio del producto
+            var quantity = parseInt($('.quantity').val()); // Obtén la cantidad del input
+            var subtotal = price * quantity; // Calcula el subtotal
+
+            // Actualiza el subtotal en la tabla
+            $('.subtotal').text(subtotal.toFixed(2)); // Asegúrate de mostrar el subtotal con 2 decimales
+
+            // Actualiza el total visualmente
+            $('#total-price').text(subtotal.toFixed(2)); // El total es el mismo que el subtotal
+        }
+
+        // Evento para cuando se cambia la cantidad del producto
+        $(document).on('input', '.quantity', function() {
+            updateSubtotal(); // Actualiza el subtotal y el total
+        });
+
+        // Inicializar la actualización del subtotal y total al cargar la página
+        $(document).ready(function() {
+            updateSubtotal(); // Llama a la función para que se actualice al cargar
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
